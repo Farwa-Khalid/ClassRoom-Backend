@@ -1,2 +1,2 @@
-type userRoles ="admin" | "teacher" | "student";
-type RateLimitRoles = userRoles | "guest";
+export type userRoles ="admin" | "teacher" | "student";
+export type RateLimitRole = userRoles | "guest";
