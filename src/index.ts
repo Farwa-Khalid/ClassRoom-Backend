@@ -19,7 +19,7 @@ app.use(cors({
 app.get('/', (req, res) => {
     res.send('Hello, welcome to the Classroom API!');
 });
-app.use('api/subjects',subjectsRouter);
+app.use('/api/subjects',subjectsRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
