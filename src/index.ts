@@ -1,4 +1,5 @@
-
+import AgentAPI from "apminsight";
+AgentAPI.config();
 
 import express from 'express';
 const app = express();
