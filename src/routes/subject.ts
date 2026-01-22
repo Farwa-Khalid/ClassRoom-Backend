@@ -56,16 +56,21 @@ router.get('/', async (req, res) => {
             .limit(limitPerPage)
             .offset(offset);
 
+        // res.status(200).json({
+        //     data: subjectsList,
+        //     pagination: {
+        //         page: currentPage,
+        //         limit: limitPerPage,
+        //         total: totalCounts,
+        //         totalPages: Math.ceil(totalCounts / limitPerPage),
+        //     },
+        // })
         res.status(200).json({
             data: subjectsList,
-            pagination: {
-                page: currentPage,
-                limit: limitPerPage,
-                total: totalCounts,
-                totalPages: Math.ceil(totalCounts / limitPerPage),
-            },
-        })
-        }
+            total: Number(totalCounts),
+        });
+
+    }
     catch (error) {
         console.error(`Get /subject ${error}`);
         res.status(500).json({error: 'Failed to get subject'});

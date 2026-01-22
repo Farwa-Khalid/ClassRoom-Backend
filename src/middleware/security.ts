@@ -15,16 +15,19 @@ try {
 
     switch (role) {
         case 'admin':
-            limit=2;
+            // limit=2;
+            limit=100;
             message='Admin limit exceeded(20 per min)';
             break;
             case 'teacher':
             case 'student':
-                limit=10;
+                // limit=10;
+                limit=50;
                 message='Student request Limit exceeded.Please wait';
                 break;
         default:
-                    limit = 5;
+                    // limit = 5;
+            limit=20;
                 message='guest request Limit exceeded(5 per min). Please sign up for higher limits.';
                 break;
 
@@ -58,7 +61,7 @@ try {
         return res.status(429).json({ error: 'Too many requests.', message });
     }
 
-
+return next();
 }catch(err){
     console.error('ARCJET middleware err: ', err);
     res.status(500).send({error: 'Internal server error',message: 'Something went wrong'});
