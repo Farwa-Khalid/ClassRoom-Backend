@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
-import * as schema from './schema'; // make sure you export your tables here
+import * as schema from './schema/index.js'; // make sure you export your tables here
 
 if (!process.env.DATABASE_URL) {
     throw new Error('DATABASE_URL is not defined');
