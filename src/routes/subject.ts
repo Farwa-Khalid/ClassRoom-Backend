@@ -77,4 +77,40 @@ router.get('/', async (req, res) => {
     }
 })
 
+// ---------- POST /api/subjects ----------
+router.post("/", async (req, res) => {
+    try {
+        // Extract fields from request body
+        const { name, code, departmentId, description } = req.body;
+
+        // Validate
+        if (!name || !code || !departmentId || !description) {
+            return res.status(400).json({ error: "All fields are required" });
+        }
+
+        // Make sure departmentId exists in the database
+        const dept = await db.select().from(departments).where(eq(departments.id, departmentId)).limit(1);
+        if (!dept[0]) {
+            return res.status(400).json({ error: "Invalid department" });
+        }
+
+        // Insert subject
+        const inserted = await db.insert(subjects).values({
+            name,
+            code,
+            departmentId,
+            description,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }).returning();
+
+        // Return inserted subject
+        res.status(201).json({ data: inserted[0] });
+    } catch (error) {
+        console.error("POST /subjects error:", error);
+        res.status(500).json({ error: "Failed to create subject" });
+    }
+});
+
+
 export  default router;
